@@ -1,6 +1,15 @@
 'use strict';
-module.exports = function BestMusicFinder () {
-    var Bmf = {};
-    
-    return Bmf;
+class BestMusicFinder {
+ constructor(album,n) {
+     if (!album || !n)
+        throw Error('Missing parameter error');
+     this.album = album;
+     this.n = n;
+ }   
+ 
+ addAlbum () {
+     
+ }
 }
+
+module.exports = BestMusicFinder;
