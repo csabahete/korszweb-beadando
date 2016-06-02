@@ -1,0 +1,30 @@
+{
+  "name": "korszweb-beadando",
+  "version": "1.0.0",
+  "main": "app/bmf.js",
+  "scripts": {
+    "test": "mocha ./app"
+  },
+  "author": "Hete Csaba",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "*",
+    "mocha": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csabahete/korszweb-beadando.git"
+  },
+  "keywords": [
+    "korszerű",
+    "webfejlesztés",
+    "beadandó",
+    "2016",
+    "tavasz"
+  ],
+  "bugs": {
+    "url": "https://github.com/csabahete/korszweb-beadando/issues"
+  },
+  "homepage": "https://github.com/csabahete/korszweb-beadando#readme",
+  "description": "korszerű webfejlesztés beadandó, 2016 tavaszi félév"
+}
