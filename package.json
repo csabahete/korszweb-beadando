@@ -1,15 +1,22 @@
 {
   "name": "korszweb-beadando",
   "version": "1.0.0",
-  "main": "app/bmf.js",
+  "main": "index.js",
   "scripts": {
-    "test": "mocha ./app"
+    "start": "node index.js",
+    "test": "mocha ./"
   },
   "author": "Hete Csaba",
   "license": "MIT",
   "dependencies": {
-    "chai": "*",
-    "mocha": "*"
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "superagent": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
   },
   "repository": {
     "type": "git",
