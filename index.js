@@ -9,17 +9,17 @@ var request = require('superagent');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 
-app.get('/albums/:album_id/best?', function(req, res) {
-  res.send({}).json();
+app.get('/albums/:album_id/best?', function (req, res) {
+    res.send({}).json();
 });
 
 var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('Best Music Finder Service is listening at http://%s:%s', host, port);
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Best Music Finder Service is listening at http://%s:%s', host, port);
 });
 
 module.exports = app;
