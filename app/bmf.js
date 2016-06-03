@@ -7,23 +7,37 @@ class BestMusicFinder {
         this.n = n;
     }
 
-    setTracksQualityIndex() {
-        var c = 1;
-        this.albumWithQualityIndexes = this.album;
-        this.albumWithQualityIndexes.forEach(function (track) {
-            track.id = c;
-            track.qualityIndex = track.frequency * c;
-            c++;
+    find() {
+        this.setTracksQualityIndex();
+        this.sortAlbumByQualityIndex();
+        return this.getFirstNMusicTitle();
+    }
+
+    getFirstNMusicTitle() {
+        var titles = [];
+        this.albumWithQualityIndexes.slice(0, this.n).forEach(function (track) {
+            titles.push(track.title);
         });
+        return titles;
+    }
+
+    setTracksQualityIndex() {
+        this.albumWithQualityIndexes = [];
+        for (var i = 0; i < this.album.length; i++) {
+            var track = this.album[i];
+            track.id = i+1;
+            track.qualityIndex = track.frequency * track.id;
+            this.albumWithQualityIndexes.push(track);
+        }
     }
 
     sortAlbumByQualityIndex() {
         this.albumWithQualityIndexes.sort(function (a, b) {
             if (a.qualityIndex === b.qualityIndex)
                 return a.id - b.id;
-            else 
+            else
                 return b.qualityIndex - a.qualityIndex
-        });
+        })
     }
 
     static checkIfParameterNIsAmbiguous(album, n) {

@@ -24,11 +24,15 @@ var expect = require('chai').expect;
 
 describe('BestMusicFinder', function () {
     it('should throw an error on empty constructor', function () {
-        expect(function () {new bestSongsFinderClass()}).to.throw('Missing parameter error');
+        expect(function () {
+            new bestSongsFinderClass()
+        }).to.throw('Missing parameter error');
     });
 
     it('should throw an error on missing parameter', function () {
-        expect(function () {new bestSongsFinderClass(album)}).to.throw('Missing parameter error');
+        expect(function () {
+            new bestSongsFinderClass(album)
+        }).to.throw('Missing parameter error');
     });
 
     it('should be an instance of BestMusicFinder', function () {
@@ -37,38 +41,60 @@ describe('BestMusicFinder', function () {
     });
 
     it('should throw an error on n > |album|', function () {
-        expect(function () {new bestSongsFinderClass(album, 16)}).to.throw('Parameter n with value greater than |album| is ambiguous');
+        expect(function () {
+            new bestSongsFinderClass(album, 16)
+        }).to.throw('Parameter n with value greater than |album| is ambiguous');
     });
 
     it('should throw an error on empty album', function () {
-        expect(function () {new bestSongsFinderClass(emptyAlbum, n)}).to.throw('Parameter n with value greater than |album| is ambiguous');
+        expect(function () {
+            new bestSongsFinderClass(emptyAlbum, n)
+        }).to.throw('Parameter n with value greater than |album| is ambiguous');
     });
 
     it('should throw an error on n = 0', function () {
-        expect(function () {new bestSongsFinderClass(album, 0)}).to.throw('Parameter n with value 0 is ambiguous');
+        expect(function () {
+            new bestSongsFinderClass(album, 0)
+        }).to.throw('Parameter n with value 0 is ambiguous');
     });
 
 
-
-    describe('#setTracksQualityIndex', function() {
-       it('should set the track\'s quality index and id', function () {
-           bestSongsFinder.setTracksQualityIndex();
-           bestSongsFinder.albumWithQualityIndexes.forEach(function (track) {
-               expect(track).to.include.keys('id', 'qualityIndex');
-           });
-       })
+    describe('#setTracksQualityIndex', function () {
+        it('should set the track\'s quality index and id', function () {
+            bestSongsFinder.setTracksQualityIndex();
+            bestSongsFinder.albumWithQualityIndexes.forEach(function (track) {
+                expect(track).to.include.keys('id', 'qualityIndex');
+            });
+        })
     });
 
-    describe('#sortAlbumByQualityIndex', function() {
-       it('should sort the tracks by their quality index (and id if quality indexes are equal)', function () {
-           bestSongsFinder.sortAlbumByQualityIndex();
-           var sortedAlbum = bestSongsFinder.albumWithQualityIndexes;
-           for (i = 0; i < sortedAlbum.length-1; i++) {
-               if (sortedAlbum[i].qualityIndex == sortedAlbum[i+1].qualityIndex)
-                   expect(sortedAlbum[i].id).to.be.below(sortedAlbum[i+1].id);
-               else
-                   expect(sortedAlbum[i+1].qualityIndex).to.be.below(sortedAlbum[i].qualityIndex);
-           }
-       })
+    describe('#sortAlbumByQualityIndex', function () {
+        it('should sort the tracks by their quality index (and id if quality indexes are equal)', function () {
+            bestSongsFinder.sortAlbumByQualityIndex();
+            var sortedAlbum = bestSongsFinder.albumWithQualityIndexes;
+            for (i = 0; i < sortedAlbum.length - 1; i++) {
+                if (sortedAlbum[i].qualityIndex == sortedAlbum[i + 1].qualityIndex)
+                    expect(sortedAlbum[i].id).to.be.below(sortedAlbum[i + 1].id);
+                else
+                    expect(sortedAlbum[i + 1].qualityIndex).to.be.below(sortedAlbum[i].qualityIndex);
+            }
+        })
+    });
+
+    describe('#find', function () {
+        it('should return an array with the title of the most popular musics', function () {
+            expect(bestSongsFinder.find()).to.be.an.instanceof(Array);
+        });
+
+        it('should return an array with length of n', function () {
+            expect(bestSongsFinder.find().length).to.be.eql(n);
+        });
+
+        it('should return the first n popular music\'s title', function () {
+            var result = bestSongsFinder.find();
+            for (var i=0; i<n; i++) {
+                expect(bestSongsFinder.albumWithQualityIndexes[i].title).to.be.eql(result[i]);
+            }
+        });
     });
 });
